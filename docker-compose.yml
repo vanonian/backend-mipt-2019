@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  rabbit:
+    hostname: "rabbit"
+    image: rabbitmq:3-management
+    command: rabbitmq-server
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  app:
+    build: App
+    environment:
+      - SECRET_KEY
+      - MAIL_USERNAME
+      - MAIL_PASSWORD
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rabbit
+
+  messenger:
+    build: Messenger
+    depends_on:
+      - rabbit

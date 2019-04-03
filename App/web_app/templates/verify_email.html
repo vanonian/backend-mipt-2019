@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>We've sent an email to  {{ user.email }}</p>
+<bp>
+<p>Didn't receive the verification email? <a href="{{ url_for('verify_email') }}">Send it again</a></p>
+
+{% endblock %}
